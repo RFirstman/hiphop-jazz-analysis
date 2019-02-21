@@ -10,7 +10,7 @@ a file called `genius_access_token.json` and put your access token in it like so
 
 ```JSON
 {
-    "clientAccessToken": "<ACCESS-TOKEN-GOES-HERE"
+    "clientAccessToken": "<ACCESS-TOKEN-GOES-HERE>"
 }
 ```
 

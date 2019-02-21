@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 jellyfish = "*"
 nltk = "*"
-poetrytools = {editable = true, ref = "master", git = "https://github.com/hyperreality/Poetry-Tools"}
 lyricsgenius = {editable = true, ref = "master", git = "https://github.com/johnwmillr/LyricsGenius.git"}
 
 [dev-packages]

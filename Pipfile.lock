@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "92bb78267f7c8900125c280b2ad2b26d303bde40a80c1e609491eb05e40c4eb8"
+            "sha256": "5f1c02fb5788978fc0f4d635de790b36a7cb5e3bc5e07b49cf530b17a298d85b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -64,17 +64,6 @@
             ],
             "index": "pypi",
             "version": "==3.4"
-        },
-        "poetrytools": {
-            "editable": true,
-            "git": "https://github.com/hyperreality/Poetry-Tools",
-            "ref": "4d3e0cec9cd5b47a0bb91fdc11946449331e2d42"
-        },
-        "python-levenshtein": {
-            "hashes": [
-                "sha256:033a11de5e3d19ea25c9302d11224e1a1898fe5abd23c61c7c360c25195e3eb1"
-            ],
-            "version": "==0.12.0"
         },
         "requests": {
             "hashes": [

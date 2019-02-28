@@ -10,10 +10,12 @@ def process_lyrics(lyrics, song_name, album, song_artist):
 
     # Replace (most) unicode characters with their ASCII equivalent
     lyrics = lyrics.replace("\u200b", "").replace("\u2014", "-").replace("\u2018","'").replace("\u2019", "'")
-    lrics = lyrics.replace("\u201c", "\"").replace("\u201d", "\"")
+    lyrics = lyrics.replace("\u201c", "\"").replace("\u201d", "\"")
 
-    # Use a regular expression to fetch verses
-    out = re.findall('\[(?P<Type>.*)(?:\:\s(?P<Artist>.*)|\s(?:[1-9]))\]\n(?P<verse>[^\[]*)\s\n', lyrics)
+    # Use a regular expression to fetch verses, had a few different attempts
+    #out = re.findall('\[(?P<Type>.*)(?:\:\s(?P<Artist>.*)|\s(?:[1-9]))\]\n(?P<verse>[^\[]*)\s\n', lyrics)
+    #out = re.findall('\[(?P<Type>.*)(?:\:\s(?P<Artist>.*)\s&(?:.*)|\s(?:[1-9]))\]\n(?P<verse>[^\[]*)\s\n', lyrics)
+    out = re.findall('\[(?P<Type>.*)(?:\:\s(?P<Artist>.*)|\s(?:[1-9]))\]\n(?P<verse>[^\[]*)[$\n]?', lyrics)
 
     # each match will be of format (Type, Artist, Verse lyrics)
     # Type corresponds to the type of verse (e.g. "Verse", "Chorus", "Hook")
@@ -23,7 +25,7 @@ def process_lyrics(lyrics, song_name, album, song_artist):
             # The type will either be of the form [Verse 1: Artist] or
             # something like [Verse 1]. In the latter case, we'll just used
             # the supplied artist name
-            if not match[1]:
+            if not match[1] or (song_artist in match[1] and match[1].index(song_artist) == 1):
                 artist = song_artist
             else:
                 artist = match[1]
@@ -35,6 +37,7 @@ def process_lyrics(lyrics, song_name, album, song_artist):
             # Get the verse and split it into an array by line
             verse = match[2]
             verse = verse.split("\n")
+            verse = list(filter(None, verse)) # remove unnecessary empty strings
             if artist not in lyric_dict:
                 lyric_dict[artist] = {}
             if album not in lyric_dict[artist]:
@@ -126,17 +129,26 @@ if __name__ == "__main__":
     genius = lyricsgenius.Genius(client_access_token)
 
     # Specify which artists to fetch lyrics for
-    artists = ["OutKast", "Rakim", "Eric B. & Rakim", "MF DOOM", "Madvillain", "Aesop Rock", "Kendrick Lamar"]
+    artists = [
+        "OutKast", "Rakim", "Eric B. & Rakim", 
+        "MF DOOM", "Madvillain", "Aesop Rock", 
+        "Kendrick Lamar", "Denzel Curry", "JID",
+        "Del the Funky Homosapien", "J Cole", "Kanye West"
+    ]
 
     lyric_dict = {}
     for artist in artists:
-        artist = genius.search_artist(artist, max_songs=5, sort="popularity")
+        artist = genius.search_artist(artist, max_songs=10, sort="popularity")
         for song in artist.songs:
 
-            # If a song doesn't have an album, it's listed on spotify but is unavailable for use
-            if not song.album: continue
+            # If a song doesn't have an album, skip it--album is needed for organizing
+            # songs. TODO: potentially handle this case later
+            if not song.album: 
+                print("no album found for " + song.title)
+                continue
             new_dict = process_lyrics(song.lyrics, song.title, song.album, artist.name)
             lyric_dict = merge_lyric_dicts(lyric_dict, new_dict)
 
     save_lyrics_to_json(lyric_dict, filename="total")
     save_json_to_folders("total.json", prefix_folder="lyrics")
+    print("Done. All songs written to disk.")

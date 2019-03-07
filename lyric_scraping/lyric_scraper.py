@@ -29,7 +29,11 @@ def process_lyrics(lyrics, song_name, album, song_artist):
                 artist = song_artist
             else:
                 artist = match[1]
+                # sometimes, multiple artists are listed. Take the first one
+                # TODO: make a more robust solution to this edge case
+                artist = artist.split("&")[0].strip()
             
+
             # This is literally to make sure Andre 3000 isn't split into two separate entries
             # i.e. some songs have him with an accent over the "e", some do not
             artist = artist.replace("\u00e9", "e")
@@ -96,9 +100,9 @@ def save_json_to_folders(filename, prefix_folder=None):
         os.makedirs(prefix_folder, exist_ok=True)
 
     for artist, _ in lyric_dict.items():
-        artist_dir = artist
+        artist_dir = make_string_filename_safe(artist)
         if prefix_folder:
-            artist_dir = prefix_folder + "/" + artist
+            artist_dir = prefix_folder + "/" + make_string_filename_safe(artist)
 
         os.makedirs(artist_dir, exist_ok=True)
         for album, _ in lyric_dict[artist].items():
@@ -112,13 +116,13 @@ def save_json_to_folders(filename, prefix_folder=None):
                     for verse in lyric_dict[artist][album][song]:
                         for line in verse:
                             song_file.write("{}\n".format(line))
-                        song_file.write("\n")
 
     return
 
 # Remove any non-alphanumeric characters from a string so
 # it can be used as a folder/file name
 def make_string_filename_safe(string):
+    string = string.replace("&", "and")
     return "".join([c for c in string if c.isalpha() or c.isdigit() or c==' ']).rstrip()
 
 if __name__ == "__main__":

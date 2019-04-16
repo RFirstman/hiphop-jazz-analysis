@@ -26,3 +26,7 @@ rs.rhyme_schemes_to_html(filename="aquemini_rhyme_schemes")
 ```
 
 This will generate an HTML file called "aquemini_rhyme_schemes.html".
+
+Example output:
+
+![Rhyme Schemer HTML output](https://github.com/RFirstman/hiphop-jazz-analysis/raw/master/resources/rhyme_scheme_html.png)

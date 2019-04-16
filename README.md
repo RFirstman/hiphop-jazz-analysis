@@ -11,12 +11,12 @@ This semester, I am working to create tools for automated rhyme scheme analysis.
 `nltk_rhyme.py` and `words_rhyme.py` are small scripts I wrote to test out two python libraries, 
 [NLTK](http://www.nltk.org/) and [Jellyfish](https://github.com/jamesturk/jellyfish), respectively.
 
-`Raplyzer/` contains code utilizing the [Raplyzer project](https://github.com/angelogiomateo/Raplyzer).
+`RhymeSchemer/` contains code utilizing the [Raplyzer project](https://github.com/angelogiomateo/Raplyzer).
 I utilized Raplyzer to make `rhyme_schemer.py`. This python program can generate a visual representation
 of rhyme schemes to either HTML or the command line. Do note that due to limitations in the number of colors
 available at the command line, I recommend using the HTML route.
 Please note that the only code I personally wrote in here was `rhyme_schemer.py`. All credit for the Raplyzer code goes
-to the original authors of said code.
+to the original authors of said project.
 
 Example usage of `rhyme_schemer.py`:
 ```python

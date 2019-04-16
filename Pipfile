@@ -8,6 +8,9 @@ jellyfish = "*"
 nltk = "*"
 lyricsgenius = {editable = true, ref = "master", git = "https://github.com/johnwmillr/LyricsGenius.git"}
 numpy = "*"
+matplotlib = "*"
+pygame = "*"
+colorama = "*"
 
 [dev-packages]
 

@@ -1,3 +1,6 @@
+## NOTE
+The code I personally wrote is contained in `rhyme_schemer.py`. Everything else included in this folder is from [Raplyzer](https://github.com/angelogiomateo/Raplyzer).
+
 raplysaattori
 =============
 

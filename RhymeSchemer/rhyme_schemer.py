@@ -1,5 +1,5 @@
 from random import choice, randrange, randint
-from colorama import init, Fore, Back
+import string
 
 from lyrics import Lyrics
 import phonetics as ph
@@ -90,16 +90,17 @@ class RhymeSchemer(Lyrics):
         word_to_vowel = {}
         vowel_to_color = {}
         for vowel, rhymes in rhyme_schemes.items():
+            if vowel not in vowel_to_color:
+                vowel_to_color[vowel] = self.generate_random_hex_color()
             for word in rhymes:
                 if word not in word_to_vowel:
                     word_to_vowel[word] = vowel
-                if vowel not in vowel_to_color:
-                    vowel_to_color[vowel] = self.generate_random_hex_color()
         
         html_string = self.generate_html_header()
         for line in self.lines_orig:
             line_string = "<div>"
             for word in line.split():
+                word = word.strip(string.punctuation)
                 if word in word_to_vowel:
                     vowel = word_to_vowel[word]
                     line_string += "<span style='color: {0}'>{1}</span> ".format(vowel_to_color[vowel], word)

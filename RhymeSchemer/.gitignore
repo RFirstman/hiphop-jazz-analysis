@@ -1,5 +1,7 @@
 lyrics
 lyrics_en
 *.ipa
+*.txt
 *.pyc
 *.html
+rhyme_test.py

@@ -30,3 +30,25 @@ This will generate an HTML file called "aquemini_rhyme_schemes.html".
 Example output:
 
 ![Rhyme Schemer HTML output](https://github.com/RFirstman/hiphop-jazz-analysis/raw/master/resources/rhyme_scheme_html.png)
+
+Rhyme Schemer utilizes common vowel sounds in words to detect assonant rhymes. The words are then grouped by their shared vowel
+sounds and assigned a color. That is why words such as "my" and "mind" or "blend" and "again" are given the same color despite
+not being perfect rhymes.
+
+The tool is not without its issues, of course. First, the colors are picked randomly, so there is no guarantee for noticeable
+differences between colors let alone accessibility for color-blind individuals. 
+
+Second, words are naively assigned to rhyming groups such that a word is put in the first group that shares one of its vowel sounds.
+Put plainly, a word may have multiple syllables, each with their own vowel sound. These syllables can each belong to distinct rhyming
+groups. Ideally, colorations of words would be split up into individual syllables.
+
+Third, this tool does not take into account the actual delivery of the verse, let alone the rhythm or stresses put on syllables.
+Here, Andre 3000 uses a repeated pattern of words and vowel sounds for some of the verse. "Warps and bends", "floats the wind",
+"count to ten", "meet the twin", and "Andre Ben" do not rhyme by convential standards. However, these phrases are delivered in
+such a way that they _do_ end up rhyming to the listener. The shared vowel sounds between each respective word in a phrase are
+not perfectly alike, but sound similar enough to pass as a rhyme. This is especially true when factoring in Andre 3000's southern
+accent. The words "ten" and "twin" sound like they share the same vowel sound when listening to the verse. Lastly, a consistent
+meter, or rhythmic structure, ties these phrases together to an additional degree.
+
+In summary, Rhyme Schemer needs more accessible color schemes, categorization rhymes on the syllable level, and consideration
+for lyrical rhythm and stresses to more accurately capture the true rhyme scheme of a given verse.
